@@ -6,7 +6,7 @@ To calculate the trajectories, the known closed-form solutions, which can be fou
 
 ## Install Dependencies
 Install tkinter.<br>
-Run `python -m pip install tk` 
+Run ```python -m pip install tk``` 
 
 ## Run App
-Run `python two_body_problem.py`
+Run ```python two_body_problem.py```
