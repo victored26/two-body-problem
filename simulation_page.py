@@ -13,64 +13,11 @@ class Simulation_Page:
         self.root = self.app.win.root
         self.settings = self.app.settings
     
-        # Draws the page's canvas
-        self.canvas = tk.Canvas(
-                self.app.bg_canvas, 
-                bg=self.settings.canvas_bg,
-                highlightthickness=self.settings.canvas_outline_thickness,
-                highlightbackground=self.settings.canvas_outline,
-                highlightcolor=self.settings.canvas_outline,
-                width=self.settings.canvas_width,
-                height=self.settings.canvas_height
-            )
-
-        # Draw the title
-        self.title_bbox = self._draw_text_label('title')
-        self.title_bbox_dims = self._bbox_dims(self.title_bbox)
+        self._draw_canvas()
+        self._draw_title()
+        self._create_go_back_button()
+        self._create_exit_button()
         
-        # Create the go back button
-        self.back_button = tk.Button(
-            self.canvas,
-            bg=self.settings.label_dict['back']['bg'],
-            activebackground=self.settings.label_dict['back']['act_bg'],
-            fg=self.settings.label_dict['back']['fg'], 
-            activeforeground=self.settings.label_dict['back']['act_fg'],
-            text=self.settings.label_dict['back']['text'],
-            font=self.settings.label_dict['back']['font'],
-            highlightthickness=4,
-            highlightbackground='black',
-            cursor=self.settings.label_dict['back']['cursor'],
-            command=self._go_back_page,
-            )
-        self.canvas.create_window(
-            self.settings.label_dict['back']['x'], 
-            self.settings.label_dict['back']['y'], 
-            window=self.back_button, 
-            width=self.title_bbox_dims[0]*0.5, 
-            height=self.title_bbox_dims[1]*0.5)
-        
-        # Create the exit button
-        self.exit_button = tk.Button(
-            self.canvas,
-            bg=self.settings.label_dict['exit']['bg'],
-            activebackground=self.settings.label_dict['exit']['act_bg'],
-            fg=self.settings.label_dict['exit']['fg'], 
-            activeforeground=self.settings.label_dict['exit']['act_fg'],
-            text=self.settings.label_dict['exit']['text'],
-            font=self.settings.label_dict['exit']['font'],
-            highlightthickness=4,
-            highlightbackground='black',
-            cursor=self.settings.label_dict['exit']['cursor'],
-            command=self.app.quit,
-            )
-        self.canvas.create_window(
-            self.settings.label_dict['exit']['x'], 
-            self.settings.label_dict['exit']['y'], 
-            window=self.exit_button, 
-            width=self.title_bbox_dims[0]*0.3, 
-            height=self.title_bbox_dims[1]*0.3
-        )
-
     def load_page(self):
         """Loads the page"""
         self.canvas.pack(expand=True)
@@ -95,7 +42,7 @@ class Simulation_Page:
             text=self.settings.label_dict[label_key]['text'],
             font=self.settings.label_dict[label_key]['font'],
             fill=self.settings.label_dict[label_key]['fg']
-        )
+            )
         text_rectangle = self.canvas.create_rectangle(
             self._bbox_padding(text_box), 
             fill=self.settings.label_dict[label_key]['bg'],
@@ -114,6 +61,68 @@ class Simulation_Page:
     def _bbox_dims(self, bbox):
         """Returns a bbox's width and height."""
         return bbox[2]-bbox[0], bbox[3]-bbox[1]
+
+    def _draw_canvas(self):
+        """Draws the page's canvas"""
+        self.canvas = tk.Canvas(
+            self.app.bg_canvas, 
+            bg=self.settings.canvas_bg,
+            highlightthickness=self.settings.canvas_outline_thickness,
+            highlightbackground=self.settings.canvas_outline,
+            highlightcolor=self.settings.canvas_outline,
+            width=self.settings.canvas_width,
+            height=self.settings.canvas_height
+            )
+    
+    def _draw_title(self):
+        """Draws the title"""
+        self.title_bbox = self._draw_text_label('title')
+        self.title_bbox_dims = self._bbox_dims(self.title_bbox)
+
+    def _create_go_back_button(self):
+        """Creates the go back button"""
+        self.back_button = tk.Button(
+            self.canvas,
+            bg=self.settings.label_dict['back']['bg'],
+            activebackground=self.settings.label_dict['back']['act_bg'],
+            fg=self.settings.label_dict['back']['fg'], 
+            activeforeground=self.settings.label_dict['back']['act_fg'],
+            text=self.settings.label_dict['back']['text'],
+            font=self.settings.label_dict['back']['font'],
+            highlightthickness=4,
+            highlightbackground='black',
+            cursor=self.settings.label_dict['back']['cursor'],
+            command=self._go_back_page,
+            )
+        self.canvas.create_window(
+            self.settings.label_dict['back']['x'], 
+            self.settings.label_dict['back']['y'], 
+            window=self.back_button, 
+            width=self.title_bbox_dims[0]*0.5, 
+            height=self.title_bbox_dims[1]*0.5)
+    
+    def _create_exit_button(self):
+        """Creates the exit button"""
+        self.exit_button = tk.Button(
+            self.canvas,
+            bg=self.settings.label_dict['exit']['bg'],
+            activebackground=self.settings.label_dict['exit']['act_bg'],
+            fg=self.settings.label_dict['exit']['fg'], 
+            activeforeground=self.settings.label_dict['exit']['act_fg'],
+            text=self.settings.label_dict['exit']['text'],
+            font=self.settings.label_dict['exit']['font'],
+            highlightthickness=4,
+            highlightbackground='black',
+            cursor=self.settings.label_dict['exit']['cursor'],
+            command=self.app.quit,
+            )
+        self.canvas.create_window(
+            self.settings.label_dict['exit']['x'], 
+            self.settings.label_dict['exit']['y'], 
+            window=self.exit_button, 
+            width=self.title_bbox_dims[0]*0.3, 
+            height=self.title_bbox_dims[1]*0.3
+            )
 
     def begin_simulation(self):
         """Sets up simulation."""
@@ -180,7 +189,8 @@ class Simulation_Page:
             self.app.two_desc, 
             self.canvas, 
             self.two_x, 
-            self.two_y)
+            self.two_y
+            )
 
         # Determine the semi-major axis for the second trajectory
         self.two_dist_center = sqrt((self.two_x-self.x0)**2+(self.two_y-self.y0)**2)

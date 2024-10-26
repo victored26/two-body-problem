@@ -11,11 +11,8 @@ class Dropdown(tk.Entry):
         self.type = type
 
         # Retrieve dropdown options
-        if self. type == 'desc':
-            self.options = self.settings.body_dict.keys()
-        elif self.type == 'ecc':
-            self.options = self.settings.eccentricities
-
+        self.options = self.settings.dropdown_options[self.type]
+        
         # Create entry variable and entry
         self.clicked = tk.StringVar()
         self.clicked.set(list(self.options)[0])
