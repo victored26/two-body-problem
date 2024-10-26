@@ -5,4 +5,8 @@ You can select a size (mass) for each body from three options (dropdown), and an
 To calculate the trajectories, the known closed-form solutions, which can be found in any classical mechanics textbook (such as Landau & Lifshitz), were used. 
 
 ## Install Dependencies
-Install tkinter.
+Install tkinter.<br>
+Run `python -m pip install tk` 
+
+## Run App
+Run `python two_body_problem.py`
