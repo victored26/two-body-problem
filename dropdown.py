@@ -11,7 +11,7 @@ class Dropdown(tk.Entry):
         self.type = type
 
         # Retrieve dropdown options
-        if self. type == 'desc':
+        if self.type == 'desc':
             self.options = self.settings.body_dict.keys()
         elif self.type == 'ecc':
             self.options = self.settings.eccentricities
