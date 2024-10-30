@@ -1,4 +1,4 @@
-# TwoBodyProblem
+# Two Body Problem Visualization
 ## Overview
 This python project is supposed to be a simple visualization of the two body problem (grativational).
 You can select a size (mass) for each body from three options (dropdown), and an eccentricity for the resulting trajectories. 
