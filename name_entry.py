@@ -29,7 +29,7 @@ class NameEntry(tk.Entry):
 
     def verify(self, *args):
         """Enforces character limit and updates body's text label."""
-        if len(self.text_var.get()) <= self.char_lmt:
+        if len(self.text_var.get()) < self.char_lmt:
             self.saved_text = self.text_var.get()
             self.body.update_text_label(self.saved_text)
         else:

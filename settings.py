@@ -129,7 +129,7 @@ class Settings:
         }
 
         # Text Entry Settings
-        self.entry_char_lmt = 8
+        self.entry_char_lmt = 9
 
         # Body Settings
         self.default_name = {'1': "One", '2': "Two"}
@@ -207,4 +207,10 @@ class Settings:
 
         # Eccentricity options
         self.eccentricities = [ str(x/10) for x in range(0, 10) ]
+
+        # Dropdown options
+        self.dropdown_options = {
+            'desc': self.body_dict.keys(),
+            'ecc': self.eccentricities
+        }
         
